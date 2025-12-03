@@ -1,137 +1,220 @@
 <!DOCTYPE html>
 <html lang="sk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EuroCore Solutions</title>
 
-    <!-- Poppins font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
 
     <style>
         :root {
-            --sky-blue-light: #7BDFF2; 
-            --sky-blue-dark: #009FFD;  
-            --bg: #F5F7FA;
-            --text: #222;
-            --card: white;
-        }
+            --light-bg: #F2F3F5;
+            --dark-bg: #1E1F22;
 
-        :root.dark {
-            --bg: #0F0F0F;
-            --text: #F0F0F0;
-            --card: #1A1A1A;
+            --primary-light: #3FE8F1;
+            --primary-dark: #1C57D1;
+
+            --text-light: #202020;
+            --text-dark: #EDEDED;
         }
 
         body {
             margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background: var(--bg);
-            color: var(--text);
+            font-family: "Poppins", sans-serif;
+            background: #fafafa;
+            color: var(--text-light);
+            transition: 0.25s;
         }
 
-        /* HLAVIČKA */
-        header {
-            background: var(--sky-blue-light);
-            padding: 25px 40px;
+        body.dark {
+            background: #121212;
+            color: var(--text-dark);
+        }
+
+        /* ------------ HEADER ------------- */
+        .main-header {
+            background: var(--light-bg);
+            padding: 20px 0;
+            border-radius: 0 0 25px 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        body.dark .main-header {
+            background: var(--dark-bg);
+        }
+
+        .header-inner {
+            width: 90%;
+            margin: auto;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            border-radius: 0 0 15px 15px;
+            justify-content: space-between;
         }
 
-        header h1 {
+        .logo-left,
+        .logo-right {
+            height: 65px;
+            user-select: none;
+        }
+
+        .site-title {
             font-size: 50px;
-            font-weight: 700;
+            font-weight: 600;
+            color: var(--primary-dark);
+            flex: 1;
+            text-align: center;
             margin: 0;
         }
 
-        .logo {
-            height: 80px;
+        body.dark .site-title {
+            color: var(--primary-light);
         }
 
-        .right-tools {
+        .header-right {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
-        select, .theme-toggle {
+        .lang-switch {
             padding: 6px 10px;
-            border-radius: 8px;
+            border-radius: 10px;
             border: 1px solid #ccc;
             font-size: 15px;
+            background: white;
+        }
+
+        body.dark .lang-switch {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            color: #fff;
         }
 
         .theme-toggle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: none;
+            background: var(--primary-dark);
             cursor: pointer;
+            transition: 0.25s;
         }
 
-        /* MENU PANEL */
-        .panel {
-            margin: 25px 20px;
-            padding: 12px 20px;
-            background: var(--card);
+        body.dark .theme-toggle {
+            background: var(--primary-light);
+        }
+
+        /* ------------ MAIN NAV BAR ------------- */
+        .main-bar {
+            width: 90%;
+            margin: auto;
+            background: var(--primary-light);
             border-radius: 15px;
+            padding: 10px 20px;
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            font-size: 18px;
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            color: #000; /* LIGHT THEME TEXT BLACK */
         }
 
-        /* O NÁS SEKCIA */
-        section {
-            max-width: 900px;
-            margin: 60px auto;
-            padding: 0 20px;
+        body.dark .main-bar {
+            background: var(--primary-dark);
+            color: #fff; /* DARK THEME TEXT WHITE */
         }
 
-        section h2 {
-            font-size: 35px;
+        .menu-btn {
+            background: transparent;
+            border: none;
+            font-size: 17px;
+            cursor: pointer;
             font-weight: 600;
+            color: inherit;
         }
 
-        section p {
-            font-size: 19px;
-            line-height: 1.7;
-            margin-top: 10px;
+        .bar-divider {
+            width: 2px;
+            height: 32px;
+            background: #ffffffaa;
+            border-radius: 5px;
+            margin: 0 20px;
+        }
+
+        body.dark .bar-divider {
+            background: #ffffff55;
+        }
+
+        .bar-right {
+            display: flex;
+            gap: 20px;
+            font-size: 15px;
+            color: inherit;
+        }
+
+        /* CONTENT */
+        .content {
+            width: 90%;
+            margin: 50px auto;
+        }
+
+        h2 {
+            font-size: 32px;
+            color: var(--primary-dark);
+        }
+
+        body.dark h2 {
+            color: var(--primary-light);
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
         }
     </style>
 </head>
+
 <body>
 
-    <!-- HLAVIČKA -->
-    <header>
-        <img id="logoLeft" class="logo" src="logo-e.png" alt="Logo E">
+    <!-- HEADER -->
+    <header class="main-header">
+        <div class="header-inner">
+            <img id="logoLeft" src="logo-e.png" class="logo-left" alt="Logo E">
 
-        <h1>EuroCore Solutions</h1>
+            <h1 class="site-title">EuroCore Solutions</h1>
 
-        <div class="right-tools">
-            <select id="lang">
-                <option>SK</option>
-                <option>CZ</option>
-                <option>DE</option>
-                <option>EN</option>
-            </select>
+            <div class="header-right">
+                <img id="logoRight" src="logo-crane.png" class="logo-right" alt="Logo Crane">
 
-            <button id="themeToggle" class="theme-toggle">🌓</button>
+                <select class="lang-switch">
+                    <option>SK</option>
+                    <option>CZ</option>
+                    <option>DE</option>
+                    <option>EN</option>
+                </select>
 
-            <img id="logoRight" class="logo" src="logo-crane.png" alt="Logo Crane">
+                <button class="theme-toggle" onclick="toggleTheme()"></button>
+            </div>
         </div>
     </header>
 
-    <!-- PANEL S MENU, DÁTUMOM A POČASÍM -->
-    <div class="panel">
-        <div>MENU ▼</div>
+    <!-- NAV BAR -->
+    <nav class="main-bar">
+        <button class="menu-btn">MENU ▼</button>
 
-        <div>
-            <span id="dateBox"></span>  
-            <span id="weatherBox">Počasie: --°C</span>
+        <div class="bar-divider"></div>
+
+        <div class="bar-right">
+            <span id="current-date"></span>
+            <span>Počasie: --°C</span>
         </div>
-    </div>
+    </nav>
 
-    <!-- O NÁS -->
-    <section>
+    <!-- CONTENT -->
+    <section class="content">
         <h2>O nás</h2>
         <p>
             EuroCore Solutions je moderná technická spoločnosť poskytujúca riešenia v oblasti priemyslu,
@@ -139,26 +222,22 @@
         </p>
     </section>
 
-<script>
-/* === DÁTUM === */
-document.getElementById("dateBox").textContent =
-    new Date().toLocaleDateString("sk-SK");
+    <!-- JS -->
+    <script>
+        // Date
+        document.getElementById("current-date").textContent =
+            new Date().toLocaleDateString("sk-SK");
 
-/* === TÉMA + LOGÁ === */
-const toggle = document.getElementById("themeToggle");
-const root = document.documentElement;
+        // THEME + LOGO SWITCH
+        function toggleTheme() {
+            document.body.classList.toggle("dark");
 
-toggle.addEventListener("click", () => {
-    root.classList.toggle("dark");
+            const isDark = document.body.classList.contains("dark");
 
-    const dark = root.classList.contains("dark");
-
-    document.getElementById("logoLeft").src = dark ? "logo-e1.png" : "logo-e.png";
-    document.getElementById("logoRight").src = dark ? "logo-crane1.png" : "logo-crane.png";
-});
-
-/* === POČASIE – neskôr doplníme API === */
-</script>
+            document.getElementById("logoLeft").src = isDark ? "logo-e1.png" : "logo-e.png";
+            document.getElementById("logoRight").src = isDark ? "logo-crane1.png" : "logo-crane.png";
+        }
+    </script>
 
 </body>
 </html>
