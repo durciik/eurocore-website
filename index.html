@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EuroCore Solutions</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --light-aqua: #3FE8F1;
+            --deep-blue: #1C57D1;
+
+            --white: #FFFFFF;
+            --black: #000000;
+            --dark-bg: #121212;
+
+            --grey-light: #F7F9FA;
+            --grey-border: #D9D9D9;
+
+            --text-main: #000000;
+            --text-secondary: #333333;
+        }
+
+        body.dark {
+            background: var(--dark-bg);
+            color: var(--white);
+            --text-main: #FFFFFF;
+            --text-secondary: #CCCCCC;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--grey-light);
+            color: var(--text-main);
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 25px 40px;
+            margin: 15px;
+            border-radius: 20px;
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+
+        .logo-left img,
+        .logo-right img {
+            height: 65px;
+            object-fit: contain;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 50px;
+            font-weight: 600;
+            color: var(--deep-blue);
+            flex: 1;
+        }
+
+        .top-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .lang-select,
+        .theme-toggle {
+            padding: 7px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--grey-border);
+            cursor: pointer;
+            background: var(--white);
+        }
+
+        /* MAIN BAR */
+        .main-bar {
+            margin: 0 15px;
+            margin-top: 10px;
+            background: var(--white);
+            padding: 15px 25px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+
+        .menu {
+            font-weight: 600;
+            color: var(--deep-blue);
+            cursor: pointer;
+        }
+
+        .divider {
+            width: 2px;
+            height: 25px;
+            background: var(--grey-border);
+            margin: 0 20px;
+        }
+
+        .status-right {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* CONTENT */
+        .content {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 34px;
+            margin-bottom: 10px;
+            color: var(--deep-blue);
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+    </style>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo-left">
+            <img src="logo-e.png" alt="Logo E">
+        </div>
+
+        <div class="title">EuroCore Solutions</div>
+
+        <div class="logo-right">
+            <img src="logo-crane.png" alt="Logo Crane">
+        </div>
+
+        <div class="top-right">
+            <div class="lang-select">SK ▼</div>
+            <div class="theme-toggle" onclick="toggleTheme()">🌓</div>
+        </div>
+    </header>
+
+    <!-- MAIN BAR -->
+    <div class="main-bar">
+        <div class="menu">MENU ▼</div>
+
+        <div class="divider"></div>
+
+        <div class="status-right">
+            <div id="date">03.12.2025</div>
+            <div id="weather">Počasie: —°C</div>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+        <h2>O nás</h2>
+        <p>
+            EuroCore Solutions je moderná technická spoločnosť poskytujúca riešenia v oblasti priemyslu,
+            stavebných technológií a technickej infraštruktúry.
+        </p>
+    </div>
+
+</body>
+</html>
