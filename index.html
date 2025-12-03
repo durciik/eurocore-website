@@ -1,236 +1,412 @@
 <!DOCTYPE html>
 <html lang="sk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EuroCore Solutions</title>
-
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            color: #111;
-            transition: background 0.3s, color 0.3s;
+        :root {
+            --bg: #f4f5f7;
+            --bg-alt: #ffffff;
+            --text: #111827;
+            --text-muted: #4b5563;
+            --accent: #2563eb;
+            --accent-soft: #dbeafe;
+            --card-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+            --radius-lg: 18px;
+            --radius-xl: 28px;
         }
 
-        /* HEADER */
-        .navbar {
-            width: 100%;
-            background: white;
-            padding: 12px 25px;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #e5f2ff 0, #f5f5f7 40%, #f3f4f6 100%);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 16px 16px 60px;
+        }
+
+        /* Top bar – jazyky + dátum + počasie (placeholder) */
+        .top-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            gap: 8px;
+        }
+
+        .lang-switch span {
+            margin-right: 8px;
+            cursor: pointer;
+            padding: 3px 8px;
+            border-radius: 999px;
+        }
+
+        .lang-switch span.active {
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .top-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .chip {
+            padding: 3px 10px;
+            border-radius: 999px;
+            background: rgba(15,23,42,0.05);
+        }
+
+        /* Header / logo + menu */
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--card-shadow);
+            padding: 14px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #ddd;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            margin-bottom: 24px;
         }
 
-        .nav-left {
+        .brand {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
-        .nav-left img {
-            width: 45px;
-        }
-
-        .menu a {
-            margin: 0 12px;
-            text-decoration: none;
-            color: #111;
-            font-size: 16px;
-        }
-
-        .nav-center {
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .nav-right {
+        .logo-placeholder {
+            width: 38px;
+            height: 38px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #facc15, #f97316);
             display: flex;
             align-items: center;
-            gap: 15px;
+            justify-content: center;
+            font-weight: 800;
+            color: #111827;
+            font-size: 19px;
         }
 
-        .weather {
-            font-size: 15px;
-            opacity: 0.8;
+        .brand-text {
+            display: flex;
+            flex-direction: column;
         }
 
-        .lang-select {
+        .brand-text h1 {
+            font-size: 20px;
+            letter-spacing: 0.03em;
+        }
+
+        .brand-text span {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 16px;
             font-size: 14px;
-            padding: 5px 8px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            padding: 6px 10px;
+            border-radius: 999px;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: var(--accent-soft);
+            color: var(--accent);
         }
 
         .theme-toggle {
-            cursor: pointer;
             padding: 6px 10px;
-            border-radius: 6px;
-            background: #eee;
-        }
-
-        /* HERO */
-        .hero {
-            text-align: center;
-            padding: 140px 25px 120px;
-            background: white;
-        }
-
-        .hero h1 {
-            font-size: 52px;
-            font-weight: 700;
-            margin: 0;
-        }
-
-        .hero p {
-            font-size: 22px;
-            opacity: 0.7;
-            margin-top: 10px;
-        }
-
-        /* ABOUT */
-        .about {
-            padding: 50px 30px;
-            text-align: center;
-        }
-        .about p {
-            max-width: 700px;
-            margin: auto;
-            font-size: 18px;
-        }
-
-        /* SERVICES */
-        .services {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 40px 20px;
-        }
-
-        .service-box {
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            font-size: 13px;
             background: #fff;
-            padding: 25px;
-            border-radius: 12px;
-            width: 280px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.05);
-            text-align: center;
+            cursor: default;
         }
 
-        /* FOOTER */
+        /* Hero sekcia */
+        .hero {
+            margin-top: 14px;
+            margin-bottom: 32px;
+            background: linear-gradient(135deg, #ffffff, #f9fafb);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--card-shadow);
+            padding: 28px 26px 26px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            right: -60px;
+            top: -60px;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(37,99,235,0.16), transparent 60%);
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: #eff6ff;
+            color: #1d4ed8;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .hero-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 520px;
+            margin-bottom: 16px;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .hero-meta span {
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(15,23,42,0.04);
+        }
+
+        /* O nás */
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section h2 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .section p {
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 720px;
+        }
+
+        /* Služby */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 16px;
+        }
+
+        .service-card {
+            background: var(--bg-alt);
+            border-radius: var(--radius-lg);
+            padding: 18px 18px 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .service-card h3 {
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .service-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Kontakt / footer */
         footer {
-            background: #222;
-            color: #ccc;
-            padding: 20px;
-            text-align: center;
-            margin-top: 50px;
+            margin-top: 32px;
+            font-size: 13px;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(148, 163, 184, 0.4);
+            padding-top: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px;
         }
 
-        /* DARK MODE */
-        .dark {
-            background: #121212;
-            color: #ddd;
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
         }
-        .dark .navbar {
-            background: #1d1d1d;
-            border-color: #333;
-        }
-        .dark .service-box {
-            background: #1e1e1e;
-        }
-        .dark footer {
-            background: #000;
+
+        @media (max-width: 820px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            nav {
+                width: 100%;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+            .services {
+                grid-template-columns: 1fr;
+            }
+            .hero-title {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
-
 <body>
-
-<!-- HEADER -->
-<div class="navbar">
-    <div class="nav-left">
-        <img src="https://i.imgur.com/z7dZQ.png" alt="Logo">
-        <div class="menu">
-            <a href="#onas">O nás</a>
-            <a href="#sluzby">Služby</a>
-            <a href="#kontakt">Kontakt</a>
+<div class="page">
+    <!-- horný panel -->
+    <div class="top-bar">
+        <div class="lang-switch">
+            <span class="active">SK</span>
+            <span>CZ</span>
+            <span>DE</span>
+            <span>EN</span>
+        </div>
+        <div class="top-right">
+            <div class="chip">Dnes: DD.MM.RRRR</div>
+            <div class="chip">Počasie: –°C, info</div>
         </div>
     </div>
 
-    <div class="nav-center" id="dateDisplay"></div>
+    <!-- hlavička -->
+    <header>
+        <div class="brand">
+            <div class="logo-placeholder">E</div>
+            <div class="brand-text">
+                <h1>EuroCore Solutions</h1>
+                <span>Industry · Building · Infrastructure</span>
+            </div>
+        </div>
+        <nav>
+            <a href="#onas" class="active">O nás</a>
+            <a href="#sluzby">Služby</a>
+            <a href="#referencie">Referencie</a>
+            <a href="#kontakt">Kontakt</a>
+            <div class="theme-toggle">Svetlá / tmavá téma (soon)</div>
+        </nav>
+    </header>
 
-    <div class="nav-right">
-        <div class="weather" id="weatherDisplay">···</div>
+    <!-- hero blok -->
+    <section class="hero" id="onas">
+        <div class="hero-tag">Technické riešenia pre priemysel a budovy</div>
+        <div class="hero-title">Spoľahlivý partner pre inštalácie a údržbu technológií</div>
+        <div class="hero-subtitle">
+            EuroCore Solutions je moderná technická spoločnosť poskytujúca riešenia v oblasti
+            priemyslu, stavebných technológií a technickej infraštruktúry v rámci EÚ.
+        </div>
+        <div class="hero-meta">
+            <span>Montáž · Servis · Projekcia</span>
+            <span>DE · CZ · SK · EU</span>
+            <span>Flexibilný tím – priemysel & domácnosti</span>
+        </div>
+    </section>
 
-        <select class="lang-select">
-            <option>SK</option>
-            <option>CZ</option>
-            <option>DE</option>
-            <option>EU</option>
-        </select>
+    <!-- sekcia O nás (krátko, posunutá nižšie) -->
+    <section class="section">
+        <h2>O nás</h2>
+        <p>
+            Zameriavame sa na technické inštalácie, priemyselné riešenia a projektové služby.
+            Prepájame praktické skúsenosti z výrobných závodov, stavebných projektov a
+            prevádzky budov tak, aby mal klient jedného partnera pre celý životný cyklus
+            technológie – od návrhu až po servis.
+        </p>
+    </section>
 
-        <div class="theme-toggle" onclick="toggleTheme()">🌙 / ☀️</div>
-    </div>
+    <!-- Služby -->
+    <section class="section" id="sluzby">
+        <h2>Naše služby</h2>
+
+        <div class="services">
+            <div class="service-card">
+                <h3>Technické inštalácie</h3>
+                <p>
+                    Profesionálna montáž, servis a technické riešenia pre firmy aj domácnosti –
+                    elektroinštalácie, rozvody, riadenie, menšie technologické celky.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <h3>Priemyselné riešenia</h3>
+                <p>
+                    Skúsenosti z priemyselných areálov (DE/AT/CZ). Podpora pri montáži liniek,
+                    kabeláži, prepojení technológií a údržbe zariadení.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <h3>Projekt & konzultácie</h3>
+                <p>
+                    Návrh riešení, koordinácia s partnermi, technické poradenstvo a
+                    dokumentácia. Pomôžeme nastaviť projekt tak, aby bol realizovateľný a
+                    udržateľný.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- placeholder referencie -->
+    <section class="section" id="referencie">
+        <h2>Referencie (stručný prehľad)</h2>
+        <p>
+            Tu neskôr doplníme výber projektov – priemyselné areály v DE, technické práce na
+            stavbách, menšie projekty pre domácnosti a smart riešenia.
+        </p>
+    </section>
+
+    <!-- kontakt / footer -->
+    <footer id="kontakt">
+        <div>
+            <strong>EuroCore Solutions</strong><br />
+            E-mail: <a href="mailto:info@eurocoresolutions.eu">info@eurocoresolutions.eu</a><br />
+            Web: <a href="https://durciik.github.io/eurocore-website/">eurocore web (GitHub Pages)</a>
+        </div>
+        <div>
+            &copy; <span id="year"></span> EuroCore Solutions · Technické riešenia v EÚ
+        </div>
+    </footer>
 </div>
-
-<!-- HERO -->
-<div class="hero">
-    <h1>EuroCore Solutions</h1>
-    <p>Industrie & Haustechnik</p>
-</div>
-
-<!-- ABOUT -->
-<div class="about" id="onas">
-    <h2>O nás</h2>
-    <p>EuroCore Solutions je moderná technická spoločnosť poskytujúca riešenia v oblasti priemyslu,
-        stavebných technológií a technickej infraštruktúry.</p>
-</div>
-
-<!-- SERVICES -->
-<div class="services" id="sluzby">
-    <div class="service-box">
-        <h3>Industrie</h3>
-        <p>Technické riešenia pre priemyselné objekty a výrobné procesy.</p>
-    </div>
-
-    <div class="service-box">
-        <h3>Haustechnik</h3>
-        <p>Montáž, servis a inštalácia technických systémov budov.</p>
-    </div>
-
-    <div class="service-box">
-        <h3>Beratung</h3>
-        <p>Konzultačná a projektová podpora podľa nemeckých štandardov.</p>
-    </div>
-</div>
-
-<!-- FOOTER -->
-<footer id="kontakt">
-    © 2025 EuroCore Solutions • Všetky práva vyhradené
-</footer>
 
 <script>
-    // Date
-    function updateDate() {
-        const d = new Date();
-        document.getElementById("dateDisplay").textContent =
-            d.toLocaleDateString("sk-SK");
-    }
-    updateDate();
-
-    // Weather (simple demo – static text)
-    document.getElementById("weatherDisplay").textContent = "12°C · Jasno";
-
-    // Theme toggle
-    function toggleTheme() {
-        document.body.classList.toggle("dark");
-    }
+    // rok do footeru
+    document.getElementById('year').textContent = new Date().getFullYear();
 </script>
-
 </body>
 </html>
