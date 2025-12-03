@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
 
     <style>
+        /* -------- ROOT COLORS -------- */
         :root {
             --light-bg: #F2F3F5;
             --dark-bg: #1E1F22;
@@ -33,7 +34,7 @@
             color: var(--text-dark);
         }
 
-        /* ------------ HEADER ------------- */
+        /* HEADER */
         .main-header {
             background: var(--light-bg);
             padding: 20px 0;
@@ -58,8 +59,10 @@
         .logo-right {
             height: 65px;
             user-select: none;
+            background: transparent !important;
         }
 
+        /* Title */
         .site-title {
             font-size: 50px;
             font-weight: 600;
@@ -73,6 +76,7 @@
             color: var(--primary-light);
         }
 
+        /* Right header elements */
         .header-right {
             display: flex;
             align-items: center;
@@ -107,7 +111,7 @@
             background: var(--primary-light);
         }
 
-        /* ------------ MAIN NAV BAR ------------- */
+        /* NAVIGATION BAR */
         .main-bar {
             width: 90%;
             margin: auto;
@@ -117,23 +121,22 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            color: #fff;
             font-weight: 500;
             box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            color: #000; /* LIGHT THEME TEXT BLACK */
         }
 
         body.dark .main-bar {
             background: var(--primary-dark);
-            color: #fff; /* DARK THEME TEXT WHITE */
         }
 
         .menu-btn {
             background: transparent;
             border: none;
+            color: #fff;
             font-size: 17px;
             cursor: pointer;
             font-weight: 600;
-            color: inherit;
         }
 
         .bar-divider {
@@ -144,15 +147,10 @@
             margin: 0 20px;
         }
 
-        body.dark .bar-divider {
-            background: #ffffff55;
-        }
-
         .bar-right {
             display: flex;
             gap: 20px;
             font-size: 15px;
-            color: inherit;
         }
 
         /* CONTENT */
@@ -179,9 +177,11 @@
 
 <body>
 
-    <!-- HEADER -->
+    <!-- ======================== HEADER ========================= -->
     <header class="main-header">
         <div class="header-inner">
+
+            <!-- Dynamic logo -->
             <img id="logoLeft" src="logo-e.png" class="logo-left" alt="Logo E">
 
             <h1 class="site-title">EuroCore Solutions</h1>
@@ -201,7 +201,7 @@
         </div>
     </header>
 
-    <!-- NAV BAR -->
+    <!-- ======================== NAVIGATION BAR ========================= -->
     <nav class="main-bar">
         <button class="menu-btn">MENU ▼</button>
 
@@ -213,7 +213,7 @@
         </div>
     </nav>
 
-    <!-- CONTENT -->
+    <!-- ======================== CONTENT ========================= -->
     <section class="content">
         <h2>O nás</h2>
         <p>
@@ -222,20 +222,27 @@
         </p>
     </section>
 
-    <!-- JS -->
+    <!-- ======================== JS ========================= -->
     <script>
         // Date
         document.getElementById("current-date").textContent =
             new Date().toLocaleDateString("sk-SK");
 
-        // THEME + LOGO SWITCH
+        // Theme toggle
         function toggleTheme() {
-            document.body.classList.toggle("dark");
+            const body = document.body;
+            const isDark = body.classList.toggle("dark");
 
-            const isDark = document.body.classList.contains("dark");
+            const logoLeft = document.getElementById("logoLeft");
+            const logoRight = document.getElementById("logoRight");
 
-            document.getElementById("logoLeft").src = isDark ? "logo-e1.png" : "logo-e.png";
-            document.getElementById("logoRight").src = isDark ? "logo-crane1.png" : "logo-crane.png";
+            if (isDark) {
+                logoLeft.src = "logo-e-white.png";
+                logoRight.src = "logo-crane-white.png";
+            } else {
+                logoLeft.src = "logo-e.png";
+                logoRight.src = "logo-crane.png";
+            }
         }
     </script>
 
